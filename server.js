@@ -13,8 +13,8 @@
  // 3.2 บอกเบราว์เซอร์ของผู้ใช้ว่า สิ่งที่ส่งกลับไปคือไฟล์ข้อความแบบ HTML แบบ UTF-8
  res.setHeader('Content-Type', 'text/html; charset=utf-8');
 
-// 3.3 ส่งข้อมูลหน้าเว็บกลับไปหาผู้ใช้ (*** ใหนักศึกษาแกชื่อ-นามสกุลตรงนี้ ***)
-res.end('<html><body style="background-color: #bee2ed; margin: 0; padding: 20px; text-align: center;"><h1 style="color: white; font-weight: bold;">สวัสดีครับ! นี่คือ Web Server ของ นายชินพัฒน์ พร้อมพัฒน์</h1></body></html>');
+// 3.3 ส่งข้อมูลหน้าเว็บกลับไปหาผู้ใช้ (*** ชินพัฒน์ พรประเสริฐ ***)
+res.end('<html><body style="background-color: #bee2ed; margin: 0; padding: 20px; text-align: center;"><h1 style="color: white; font-weight: bold;">สวัสดีครับ! นี่คือเซิร์ฟเวอร์ของ ชินพัฒน์ พรประเสริฐ</h1></body></html>');
  });
 
  // 4. สั่งให้เซิร์ฟเวอรเริ่มต้นเปิดรับฟังการเชื่อมต่อตาม Port ที่กําหนดไว้
