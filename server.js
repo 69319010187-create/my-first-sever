@@ -35,28 +35,97 @@ res.end(`<!DOCTYPE html>
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
     }
     
     .container {
       background-color: rgba(190, 226, 237, 0.5);
-      padding: 40px;
-      border-radius: 10px;
+      padding: 50px;
+      border-radius: 15px;
       text-align: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      max-width: 600px;
+      width: 90%;
+      backdrop-filter: blur(5px);
     }
     
     h1 {
       color: white;
       font-weight: bold;
-      font-size: 32px;
+      font-size: 36px;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+    
+    .info {
+      color: white;
+      font-size: 18px;
+      line-height: 1.8;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    
+    .info-title {
+      font-weight: bold;
+      color: #fff;
+      margin-top: 15px;
+      font-size: 16px;
+    }
+    
+    .student-id {
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    
+    .nickname {
+      color: #ffe066;
+      font-weight: bold;
+      font-size: 22px;
+      margin: 10px 0;
+    }
+    
+    .hobbies {
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+    
+    .hobby-item {
+      display: inline-block;
+      background-color: rgba(255, 255, 255, 0.25);
+      padding: 8px 16px;
+      margin: 5px;
+      border-radius: 20px;
+      font-size: 15px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>สวัสดีครับ! นี่คือเซิร์ฟเวอร์ของ ชินพัฒน์ พรประเสริฐ</h1>
+    <h1>🎵 ฟีโน่ 🎮</h1>
+    
+    <div class="student-id">
+      รหัสนักศึกษา: 69319010187
+    </div>
+    
+    <div class="info">
+      <p><strong>ชื่อจริง:</strong> ชินพัฒน์ พรประเสริฐ</p>
+      <p class="nickname">ชื่อเล่น: ฟีโน่ ✨</p>
+      
+      <div class="hobbies">
+        <p class="info-title">🎯 สิ่งที่ชอบ:</p>
+        <div>
+          <span class="hobby-item">🎵 ฟังเพลง</span>
+          <span class="hobby-item">🎮 เล่นเกม</span>
+          <span class="hobby-item">💪 Weight Training</span>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>`);
