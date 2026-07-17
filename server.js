@@ -138,9 +138,133 @@ res.end(`<!DOCTYPE html>
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-20px); }
     }
+
+    .music-player {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 107, 157, 0.9);
+      padding: 15px;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      z-index: 1000;
+      font-size: 24px;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .music-player:hover {
+      transform: scale(1.1);
+      background: rgba(255, 107, 157, 1);
+    }
+
+    .music-player.playing {
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .music-modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .music-modal.show {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .music-content {
+      position: relative;
+      background: rgba(190, 226, 237, 0.95);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      max-width: 560px;
+      width: 90%;
+    }
+
+    .close-music {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      background: rgba(255, 107, 157, 0.8);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .close-music:hover {
+      background: rgba(255, 107, 157, 1);
+    }
+
+    .youtube-embed {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .youtube-embed iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body>
+  <!-- Music Player Button -->
+  <div class="music-player" id="musicPlayer" onclick="openMusicPlayer()">
+    🎵
+  </div>
+
+  <!-- Music Modal -->
+  <div class="music-modal" id="musicModal">
+    <div class="music-content">
+      <button class="close-music" onclick="closeMusicPlayer()">✕</button>
+      <div class="youtube-embed">
+        <iframe 
+          width="100%" 
+          height="315" 
+          src="https://www.youtube.com/embed/_LIaHrSm2Ek?autoplay=1&controls=1&modestbranding=1" 
+          title="Background Music" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+
   <div class="container">
     <h1>🎵 ฟีโน่ 🎮</h1>
     
@@ -211,6 +335,27 @@ res.end(`<!DOCTYPE html>
         response.style.display = 'none';
       }, 500);
     }
+
+    function openMusicPlayer() {
+      const modal = document.getElementById('musicModal');
+      const player = document.getElementById('musicPlayer');
+      modal.classList.add('show');
+      player.classList.add('playing');
+    }
+
+    function closeMusicPlayer() {
+      const modal = document.getElementById('musicModal');
+      const player = document.getElementById('musicPlayer');
+      modal.classList.remove('show');
+      player.classList.remove('playing');
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('musicModal').addEventListener('click', function(event) {
+      if (event.target === this) {
+        closeMusicPlayer();
+      }
+    });
   </script>
 </body>
 </html>`);
