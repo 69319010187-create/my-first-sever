@@ -10,7 +10,7 @@
  // 3.1 ตั้งรหัสสถานะ 200 หมายถึง "ทํางานสําเร็จ (OK)"
  res.statusCode = 200;
 
- // 3.2 บอกเบราว์เซอร์ของผู้ใช้ว่า สิ่งที่ส่งกลับไปคือไฟล์ข้อความแบบ HTML แบบ UTF-8
+ // 3.2 บอกเบราว์เซอร์ของผู้ใช้ว่า สิ่งที่ส่งกลับไปคือไฟล์ข้อความแบบ HTML
  res.setHeader('Content-Type', 'text/html; charset=utf-8');
 
 // 3.3 ส่งข้อมูลหน้าเว็บกลับไปหาผู้ใช้ (*** ชินพัฒน์ พรประเสริฐ ***)
@@ -103,6 +103,41 @@ res.end(`<!DOCTYPE html>
       border-radius: 20px;
       font-size: 15px;
     }
+
+    .cat-button {
+      background: linear-gradient(135deg, #ff6b9d, #feca57);
+      border: none;
+      color: white;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .cat-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .cat-button:active {
+      transform: scale(0.95);
+    }
+
+    .cat-response {
+      margin-top: 15px;
+      font-size: 40px;
+      animation: bounce 0.5s ease;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
   </style>
 </head>
 <body>
@@ -125,8 +160,58 @@ res.end(`<!DOCTYPE html>
           <span class="hobby-item">💪 Weight Training</span>
         </div>
       </div>
+
+      <button class="cat-button" onclick="playSound()">🐱 Cat Sound</button>
+      <div class="cat-response" id="catResponse" style="display: none;">Meow! 🐱</div>
     </div>
   </div>
+
+  <script>
+    function playSound() {
+      // Show the cat response
+      const response = document.getElementById('catResponse');
+      response.style.display = 'block';
+      
+      // Use Web Audio API to create cat sound
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      
+      // Meow sound frequencies
+      const now = audioContext.currentTime;
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      // First meow - higher pitch
+      oscillator.frequency.setValueAtTime(400, now);
+      oscillator.frequency.exponentialRampToValueAtTime(200, now + 0.2);
+      gainNode.gain.setValueAtTime(0.3, now);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+      
+      oscillator.start(now);
+      oscillator.stop(now + 0.2);
+      
+      // Second meow - lower pitch
+      const osc2 = audioContext.createOscillator();
+      const gain2 = audioContext.createGain();
+      osc2.connect(gain2);
+      gain2.connect(audioContext.destination);
+      
+      osc2.frequency.setValueAtTime(300, now + 0.25);
+      osc2.frequency.exponentialRampToValueAtTime(150, now + 0.45);
+      gain2.gain.setValueAtTime(0.3, now + 0.25);
+      gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.45);
+      
+      osc2.start(now + 0.25);
+      osc2.stop(now + 0.45);
+      
+      // Hide response after animation
+      setTimeout(() => {
+        response.style.display = 'none';
+      }, 500);
+    }
+  </script>
 </body>
 </html>`);
  });
