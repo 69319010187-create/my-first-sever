@@ -31,7 +31,6 @@
      tableRows += `<tr>
        <td>${row.student_id || 'N/A'}</td>
        <td>${row.student_name || 'N/A'}</td>
-       <td>${row.nickname || 'N/A'}</td>
      </tr>`;
    });
 
@@ -134,7 +133,6 @@ res.end(`<!DOCTYPE html>
         <tr>
           <th>รหัสนักศึกษา</th>
           <th>ชื่อ-นามสกุล</th>
-          <th>ชื่อเล่น</th>
         </tr>
       </thead>
       <tbody>
